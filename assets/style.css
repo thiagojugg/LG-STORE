@@ -226,3 +226,47 @@
     filter:brightness(1.25) contrast(1.04) saturate(1.12);
   }
 }
+
+
+/* Slideshow ocupa todo o banner, com fotos centralizadas */
+.hero{isolation:isolate}
+.hero:after{background:transparent;z-index:1}
+.hero-grain{z-index:2;pointer-events:none}
+.hero-copy{z-index:3}
+.hero-art{
+  inset:0;
+  top:0;
+  right:0;
+  width:100%;
+  height:100%;
+  transform:none;
+  border:0;
+  z-index:0;
+  background:#171717;
+}
+.hero-art:after{
+  z-index:1;
+  background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.48) 38%,rgba(0,0,0,.12) 100%);
+}
+.hero-slide{
+  object-fit:cover;
+  object-position:50% 50%;
+  width:100%;
+  height:100%;
+}
+.hero-stamp,.hero-vertical,.hero-index,.hero-big-type{display:none}
+@media(max-width:760px){
+  .hero-art{
+    inset:0;
+    width:100%;
+    height:100%;
+    right:0;
+    top:0;
+    bottom:0;
+    opacity:1;
+  }
+  .hero-art:after{
+    background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.38) 45%,rgba(0,0,0,.18) 100%);
+  }
+  .hero-slide{object-position:center center}
+}
