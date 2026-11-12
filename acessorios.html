@@ -37,6 +37,7 @@
           <a class="silver-card silver-prata" href="relogios.html"><span>01 / COLEÇÃO</span><strong>RELÓGIOS<span>↗</span></strong><small>RELÓGIOS</small></a>
           <a class="silver-card silver-correntes" href="correntes.html"><span>02 / COLEÇÃO</span><strong>CORRENTES<span>↗</span></strong><small>NO SEU PRÓPRIO ELO</small></a>
           <a class="silver-card silver-pulseiras" href="pulseiras.html"><span>03 / COLEÇÃO</span><strong>PULSEIRAS<span>↗</span></strong><small>DETALHES NO PULSO</small></a>
+          <a class="silver-card silver-kits" href="#catalogo" data-filter="kits femininos"><span>04 / COLEÇÃO</span><strong>KITS FEMININOS<span>↗</span></strong><small>CONJUNTOS FEMININOS</small></a>
         </div>
       </div>
     </section>
@@ -61,7 +62,7 @@
     let activeFilter="";
     const grid=document.querySelector("#accessory-grid");
     function renderAccessories(){
-      const terms=["acessório","prata","relógio","relogio","corrente","pulseira"];
+      const terms=["acessório","prata","relógio","relogio","corrente","pulseira","kit","feminino"];
       const list=allProducts.filter(p=>{
         const category=String(p.category||"").toLocaleLowerCase("pt-BR");
         const name=String(p.name||"").toLocaleLowerCase("pt-BR");
