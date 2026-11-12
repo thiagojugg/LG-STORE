@@ -111,4 +111,4 @@
 
 
 /* Preço promocional */
-.product-price{display:flex;flex-direction:column;align-items:flex-end;gap:3px}.price-old{font-size:9px;color:#888;text-decoration:line-through;font-weight:500}.price-current{font-size:11px;font-weight:800;color:#111}
+.product-price{display:flex;flex-direction:column;align-items:flex-end;gap:6px;white-space:nowrap}.price-real,.price-promo{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.price-real small,.price-promo small{font-size:7px;letter-spacing:1px;font-weight:700;color:#777}.price-old{font-size:9px;color:#888;text-decoration:line-through;font-weight:500}.price-promo{background:#111;color:#fff;padding:6px 8px}.price-promo small{color:#c5c5c5}.price-current{font-size:13px;font-weight:900;color:#fff}
