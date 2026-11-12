@@ -142,3 +142,11 @@
     linear-gradient(0deg,rgba(0,0,0,.38),rgba(0,0,0,.08)),
     url("Joias Prateadas Flutuando em Estúdio.png") center center / cover no-repeat;
 }
+
+
+/* Imagem centralizada no card de Camisetas */
+.category-one:before{
+  background:
+    linear-gradient(0deg,rgba(0,0,0,.38),rgba(0,0,0,.08)),
+    url("Camisetas Polo Flutuantes em Estúdio Futurista.png") center center / cover no-repeat;
+}
