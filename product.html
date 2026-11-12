@@ -174,7 +174,7 @@
       gallery.addEventListener("pointerup",event=>{if(pointerStartX===null)return;const delta=event.clientX-pointerStartX;pointerStartX=null;if(Math.abs(delta)>55)showImage(currentImageIndex+(delta<0?1:-1));});
       document.getElementById("detail-buy").addEventListener("click",()=>{
         const photoUrl=new URL(chosenImage,window.location.href).href;
-        const message="Olá! Tenho interesse na "+product.name+", cor "+chosenColor+", tamanho G.\nFoto do produto escolhido: "+photoUrl+"\nA peça ainda está disponível?";
+        const message="Olá! Tenho interesse na "+product.name+", cor "+chosenColor+", tamanho "+(chosenSize||"Único")+".\nFoto do produto escolhido: "+photoUrl+"\nA peça ainda está disponível?";
         window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message),"_blank","noopener");
       });
     }
