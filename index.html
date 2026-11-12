@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="L&G STORE — streetwear, cultura urbana e marcas independentes.">
+  <title>L&G STORE — Streetwear & Culture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/script.js" defer></script>
+</head>
+<body>
+  <div class="announcement">STREETWEAR • MULTIBRAND STORE <span>—</span> ATENDIMENTO DIRETO PELO WHATSAPP</div>
+  <header class="site-header">
+    <a class="wordmark" href="#" aria-label="L&G Store início">L&amp;G<span>®</span><small>STORE</small></a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="#novidades">NOVIDADES</a>
+      <a href="#categorias">CATEGORIAS</a>
+      <a href="#sobre">A L&amp;G</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" id="search-toggle" aria-label="Abrir pesquisa" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg></button>
+      <a class="bag-link" href="#sacola">SACOLA <span id="bag-count">0</span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="search-panel" id="search-panel" hidden>
+    <form id="search-form" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+      <input id="site-search" type="search" placeholder="Busque por produto, marca ou categoria..." autocomplete="off" aria-label="Pesquisar produtos">
+      <button type="button" id="search-close" aria-label="Fechar pesquisa">✕</button>
+    </form>
+    <div class="search-results" id="search-results" aria-live="polite"><span>Digite para pesquisar no catálogo.</span></div>
+  </section>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grain"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> CULTURE IN EVERY DETAIL</p>
+        <h1>VISTA<br><span>SUA</span> <em>IDENTIDADE.</em></h1>
+        <p class="hero-description">Mais que tendência. Uma expressão de quem você é. Explore uma curadoria de marcas e peças da cultura streetwear.</p>
+        <a class="button button-light" href="#novidades">EXPLORAR A LOJA <span>↗</span></a>
+      </div>
+      <div class="hero-art" aria-label="Composição gráfica L&G Store">
+        <div class="hero-stamp">L&amp;G<br><small>STREET CULTURE</small></div>
+        <div class="hero-vertical">URBAN ESSENTIALS / VOL. 001</div>
+        <div class="hero-index">01<span>/</span>26</div>
+        <div class="hero-big-type">NO<br>RULES<span>.</span></div>
+      </div>
+      <div class="hero-bottom"><span>INDEPENDENT SPIRIT</span><span>SCROLL TO DISCOVER ↓</span><span>BRASIL — 2026</span></div>
+    </section>
+
+    <div class="ticker" aria-label="L&G Store">
+      <div class="ticker-track"><span>STREET IS AN ATTITUDE</span><b>✳</b><span>FIND YOUR OWN WAY</span><b>✳</b><span>STREET IS AN ATTITUDE</span><b>✳</b><span>FIND YOUR OWN WAY</span><b>✳</b></div>
+    </div>
+
+    <section class="section categories-section" id="categorias">
+      <div class="section-heading"><div><p class="eyebrow dark-eyebrow">EXPLORE YOUR STYLE / 01</p><h2>ESCOLHA SUA<br><span>VIBE.</span></h2></div><p class="section-note">Encontre peças que acompanham<br>seu jeito de viver a rua.</p></div>
+      <div class="category-grid">
+        <a class="category-card category-one" href="#novidades" data-category="Camisetas"><span class="category-number">01 / CATEGORY</span><strong>TEES<span>↗</span></strong><small>CAMISETAS</small></a>
+        <a class="category-card category-two" href="#novidades" data-category="Calças"><span class="category-number">02 / CATEGORY</span><strong>BOTTOMS<span>↗</span></strong><small>CALÇAS & BERMUDAS</small></a>
+        <a class="category-card category-three" href="#novidades" data-category="Acessórios"><span class="category-number">03 / CATEGORY</span><strong>EXTRAS<span>↗</span></strong><small>ACESSÓRIOS</small></a>
+      </div>
+    </section>
+
+    <section class="section products-section" id="novidades">
+      <div class="section-heading products-heading"><div><p class="eyebrow dark-eyebrow">THE LATEST SELECTION / 02</p><h2>DROP<br><span>RECENTE.</span></h2></div><p class="section-note">Uma seleção em constante movimento.<br>Novidades chegam por aqui.</p></div>
+      <div class="product-toolbar"><span id="product-count">CATÁLOGO / 00 ITENS</span><button id="clear-filter" class="text-button" hidden>VER TODOS ×</button></div>
+      <div class="product-grid" id="product-grid"></div>
+      <div class="catalog-empty" id="catalog-empty"><span class="empty-mark">L&amp;G</span><h3>O PRÓXIMO DROP<br>COMEÇA AQUI.</h3><p>Estamos preparando a seleção de produtos. Em breve, novidades por aqui.</p></div>
+    </section>
+
+    <section class="manifesto" id="sobre">
+      <div class="manifesto-top"><span>L&amp;G STORE®</span><span>MORE THAN CLOTHES / 03</span></div>
+      <p class="eyebrow">OUR POINT OF VIEW</p>
+      <h2>SEU ESTILO.<br>NENHUMA <span>REGRA.</span></h2>
+      <div class="manifesto-bottom"><p>A L&amp;G conecta marcas, pessoas e diferentes expressões da cultura urbana. Vista o que representa você.</p><a class="button button-outline" href="https://wa.me/5511958593868" target="_blank" rel="noopener">FALE COM A L&amp;G ↗</a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contato">
+    <a class="footer-logo" href="#">L&amp;G<span>®</span></a>
+    <div class="footer-center"><span>STREETWEAR / MULTIBRAND</span><span>© 2026 L&amp;G STORE. TODOS OS DIREITOS RESERVADOS.</span></div>
+    <a class="footer-contact" href="https://wa.me/5511958593868" target="_blank" rel="noopener">WHATSAPP ↗</a>
+  </footer>
+
+  <section class="bag-drawer" id="sacola" aria-label="Sacola de compras">
+    <div class="bag-head"><div><p class="eyebrow dark-eyebrow">YOUR SELECTION</p><h2>SUA SACOLA<span>.</span></h2></div><button id="bag-close" class="close-button" aria-label="Fechar sacola">✕</button></div>
+    <div id="bag-items" class="bag-items"><p class="bag-empty">Sua sacola está vazia.</p></div>
+    <div class="bag-footer"><div class="bag-total"><span>SUBTOTAL</span><strong id="bag-total">R$ 0,00</strong></div><button class="button button-dark" id="checkout-button" disabled>FINALIZAR PELO WHATSAPP ↗</button><small>O pedido será enviado para atendimento via WhatsApp.</small></div>
+  </section>
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <div class="mobile-menu" id="mobile-menu"><a href="#novidades">NOVIDADES ↗</a><a href="#categorias">CATEGORIAS ↗</a><a href="#sobre">A L&amp;G ↗</a><a href="https://wa.me/5511958593868" target="_blank" rel="noopener">CONTATO ↗</a></div>
+</body>
+</html>
