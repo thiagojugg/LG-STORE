@@ -158,3 +158,5 @@
     linear-gradient(0deg,rgba(0,0,0,.38),rgba(0,0,0,.08)),
     url("Trio de Calças Flutuantes em Estúdio Futurista.png") center center / cover no-repeat;
 }
+/* Ajuste do título de lançamentos para caber melhor em telas pequenas */
+@media(max-width:760px){.products-heading h2{font-size:clamp(48px,12vw,62px);letter-spacing:-1px}}
