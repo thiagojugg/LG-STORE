@@ -21,7 +21,7 @@
 .silver-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#080808e8,transparent 75%)}
 .silver-prata:before{background:linear-gradient(0deg,#1119,transparent 70%),url("Relógio de Aço em Plataforma Iluminada.png") center/cover no-repeat}
 .silver-correntes:before{background:linear-gradient(0deg,#1119,transparent 70%),url("Colar Cuban Prateado em Exibição Futurista.png") center/cover no-repeat}
-.silver-pulseiras:before{background:radial-gradient(ellipse at 65% 35%,#aaa,#4a4a4a 35%,#202020 78%)}
+.silver-pulseiras:before{background:linear-gradient(0deg,#1119,transparent 70%),url("Pulseira cubana prateada em destaque.png") center/cover no-repeat}
 .silver-card>span,.silver-card small{font-size:8px;letter-spacing:1.5px;color:#d0d0d0}
 .silver-card strong{font:900 clamp(34px,4.5vw,60px)/.85 var(--display);letter-spacing:-1px}
 .silver-card strong span{font:400 17px var(--body);margin-left:8px}
