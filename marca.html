@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f3f1">
+  <meta name="description" content="Explore os produtos por marca na L&G STORE.">
+  <title>Marcas — L&G STORE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css?v=20261112-brand-pages">
+  <style>
+    .brand-page-main{min-height:65vh;padding:58px 8% 100px}
+    .brand-page-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:34px;border-bottom:1px solid var(--line);padding-bottom:25px}
+    .brand-page-top h1{font:900 clamp(58px,9vw,112px)/.82 var(--display);letter-spacing:-3px;margin:12px 0 0;text-transform:uppercase}
+    .brand-page-top p{font-size:9px;letter-spacing:1.4px;color:#777}
+    .brand-page-back{display:inline-block;color:var(--black);font-size:9px;font-weight:700;letter-spacing:1px;text-decoration:none;margin-bottom:22px}
+    .brand-page-count{font-size:8px;letter-spacing:1.3px;color:#777;margin-bottom:18px}
+    .brand-page-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+    .brand-page-empty{padding:65px 20px;text-align:center;border:1px solid var(--line)}
+    .brand-page-empty h2{font:900 52px/.9 var(--display);margin:0 0 14px}
+    .brand-page-empty p{font-size:11px;color:#777}
+    @media(max-width:760px){.brand-page-main{padding:36px 6% 70px}.brand-page-top{align-items:flex-start;flex-direction:column;gap:12px}.brand-page-top h1{font-size:clamp(58px,16vw,88px)}.brand-page-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+  </style>
+</head>
+<body>
+  <div class="announcement">L&amp;G STORE • MULTIMARCAS <span>—</span> IDENTIDADE EM CADA PEÇA</div>
+  <header class="site-header">
+    <a class="wordmark" href="index.html" aria-label="L&G Store início">L&amp;G<span>®</span><small>STORE</small></a>
+    <nav class="desktop-nav" aria-label="Navegação principal"><a href="index.html">INÍCIO</a><a href="index.html#categorias">CATEGORIAS</a></nav>
+    <div class="header-actions"><a class="bag-link" href="index.html">VOLTAR À LOJA ↗</a></div>
+  </header>
+  <main class="brand-page-main">
+    <a class="brand-page-back" href="index.html">← VOLTAR À LOJA</a>
+    <div class="brand-page-top"><div><p class="eyebrow dark-eyebrow">CATÁLOGO POR MARCA / L&amp;G STORE</p><h1 id="brand-title">MARCA</h1></div><p>PEÇAS SELECIONADAS</p></div>
+    <p class="brand-page-count" id="brand-count">CARREGANDO PRODUTOS...</p>
+    <div class="product-grid brand-page-grid" id="brand-grid"></div>
+    <section class="brand-page-empty" id="brand-empty" hidden><h2>NOVIDADES<br>EM BREVE.</h2><p>Estamos preparando novos produtos desta marca.</p></section>
+  </main>
+  <footer class="site-footer">
+    <a class="footer-logo" href="index.html">L&amp;G<span>®</span></a>
+    <div class="footer-center"><span>MODA URBANA / MULTIMARCAS</span><span>© 2026 L&amp;G STORE. TODOS OS DIREITOS RESERVADOS.</span></div>
+    <a class="footer-instagram" href="https://ig.me/m/lgstore.20.26" target="_blank" rel="noopener">INSTAGRAM ↗</a>
+  </footer>
+  <script>
+    const money=value=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(value)||0);
+    const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+    const requestedBrand=new URLSearchParams(location.search).get("marca")||"";
+    const normalized=requestedBrand.toLocaleLowerCase("pt-BR");
+    const matchesBrand=product=>{
+      const brand=String(product.brand||"").toLocaleLowerCase("pt-BR");
+      const name=String(product.name||"").toLocaleLowerCase("pt-BR");
+      if(normalized==="d&g")return brand.includes("dolce")||brand==="d&g"||name.includes("d&g")||name.includes("dolce & gabbana");
+      return brand===normalized||name.includes(normalized);
+    };
+    const title=document.querySelector("#brand-title");
+    const grid=document.querySelector("#brand-grid");
+    const empty=document.querySelector("#brand-empty");
+    const count=document.querySelector("#brand-count");
+    title.textContent=requestedBrand||"MARCA";
+    document.title=(requestedBrand||"Marca")+" — L&G STORE";
+    fetch("products.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new Error("catalog");return response.json();}).then(data=>{
+      const items=(Array.isArray(data)?data:[]).filter(matchesBrand).reverse();
+      count.textContent="CATÁLOGO / "+String(items.length).padStart(2,"0")+" PRODUTOS";
+      empty.hidden=items.length>0;
+      grid.innerHTML=items.map(product=>'<article class="product-card"><a class="product-card-link" href="product.html?id='+encodeURIComponent(product.id)+'" target="_blank" rel="noopener"><div class="product-image">'+(product.image?'<img src="'+escapeHTML(product.image)+'" alt="'+escapeHTML(product.name)+'" loading="lazy">':'<span class="product-placeholder">L&amp;G</span>')+'</div><div class="product-info"><div><h3>'+escapeHTML(product.name||"Produto")+'</h3><p>'+escapeHTML([product.brand,product.category].filter(Boolean).join(" / "))+'</p></div><strong class="product-price">'+(product.originalPrice?'<span class="price-real"><small>VALOR REAL</small><del class="price-old">'+money(product.originalPrice)+'</del></span>':'')+'<span class="price-promo"><small>'+(product.originalPrice?"VALOR PROMOCIONAL":"VALOR")+'</small><strong class="price-current">'+money(product.price)+'</strong></span></strong></div><span class="product-buy">VER DETALHES ↗</span></a></article>').join("");
+    }).catch(()=>{
+      count.textContent="CATÁLOGO INDISPONÍVEL";
+      empty.hidden=false;
+      empty.querySelector("p").textContent="Não foi possível carregar os produtos agora. Tente novamente mais tarde.";
+    });
+  </script>
+</body>
+</html>
