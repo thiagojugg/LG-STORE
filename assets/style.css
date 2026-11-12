@@ -312,3 +312,48 @@
 @media(prefers-reduced-motion:reduce){
   ::view-transition-old(root),::view-transition-new(root){animation:none}
 }
+
+
+/* Atmosfera cinematográfica global — textura, vinheta e movimentos sutis */
+body{position:relative;isolation:isolate}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:900;
+  pointer-events:none;
+  opacity:.075;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='filmgrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23filmgrain)' opacity='.55'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+  mix-blend-mode:multiply;
+}
+body:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:899;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.075) 100%);
+}
+main>section,.ticker,.site-footer{
+  animation:lg-cinema-arrive .85s cubic-bezier(.2,.65,.25,1) both;
+}
+main>section:nth-of-type(2){animation-delay:.06s}
+main>section:nth-of-type(3){animation-delay:.12s}
+main>section:nth-of-type(4){animation-delay:.18s}
+@keyframes lg-cinema-arrive{
+  from{opacity:0;transform:translateY(14px);filter:blur(3px)}
+  to{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+.product-image img,.details-gallery img,.detail-main-image,.category-card:before,.silver-card:before{
+  transition:transform .75s cubic-bezier(.2,.65,.25,1),filter .75s ease;
+}
+.product-card:hover .product-image img,
+.details-gallery img:hover,.detail-main-image:hover{
+  transform:scale(1.025);
+  filter:contrast(1.04) saturate(1.06);
+}
+@media(prefers-reduced-motion:reduce){
+  main>section,.ticker,.site-footer{animation:none}
+  .product-image img,.details-gallery img,.detail-main-image,.category-card:before,.silver-card:before{transition:none}
+}
