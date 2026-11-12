@@ -71,3 +71,35 @@
  .silver-card strong{font-size:clamp(36px,10vw,54px)}
 }
 @media(min-width:761px) and (max-width:1000px){.silver-section{padding-left:6%;padding-right:6%}.silver-card{min-height:260px}}
+
+
+/* Página de detalhes do produto */
+.product-details-section{background:var(--paper);padding:36px 8% 100px;min-height:70vh}
+.product-details-section[hidden]{display:none}
+.details-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:32px;font-size:8px;letter-spacing:1.3px;color:#777}
+.details-back{border:0;background:none;padding:8px 0;font:700 9px var(--body);letter-spacing:1px;cursor:pointer;color:var(--black)}
+.details-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:6%;align-items:start}
+.details-gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.details-gallery img{width:100%;aspect-ratio:3/4;object-fit:cover;background:#ddd}
+.details-copy{padding:15px 0;max-width:480px}
+.details-copy h2{font:900 clamp(48px,6vw,76px)/.85 var(--display);letter-spacing:-1.5px;margin:0 0 20px}
+.details-description{font-size:11px;color:#777;line-height:1.8;margin:0 0 30px}
+.details-option{border-top:1px solid #ccc;padding:18px 0}
+.details-option>span{display:flex;justify-content:space-between;font-size:9px;letter-spacing:1.2px;font-weight:700}
+.details-option>span b{color:#777}
+.color-options,.size-options{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.color-option,.size-option{border:1px solid #bbb;background:transparent;padding:11px 15px;font-size:9px;font-weight:700;letter-spacing:.5px;cursor:pointer}
+.color-option.active{background:#111;color:#fff;border-color:#111}
+.size-option.available{background:#111;color:#fff;border-color:#111;min-width:52px}
+.size-option.sold-out{color:#aaa;text-decoration:line-through;cursor:not-allowed;background:#e8e8e5}
+.stock-note{font-size:10px;line-height:1.7;color:#777;margin:8px 0 22px}
+.details-buy{width:100%;min-height:52px;background:#111;color:#fff;border:1px solid #111;font-size:9px;font-weight:700;letter-spacing:1.2px;cursor:pointer}
+.details-buy:hover{background:#333}
+@media(max-width:760px){
+ .product-details-section{padding:25px 6% 70px}
+ .details-top{font-size:7px}
+ .details-layout{grid-template-columns:1fr;gap:25px}
+ .details-gallery{gap:8px}
+ .details-copy{padding:0}
+ .details-copy h2{font-size:58px}
+}
