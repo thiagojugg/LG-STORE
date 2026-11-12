@@ -32,8 +32,9 @@ function renderProducts(items){
     const card = document.createElement("article");
     card.className = "product-card";
     const image = product.image ? `<img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name||"Produto L&G")}" loading="lazy">` : '<span class="product-placeholder">L&amp;G</span>';
-    card.innerHTML = `<div class="product-image">${image}</div><div class="product-info"><div><h3>${escapeHTML(product.name||"Produto")}</h3><p>${escapeHTML([product.brand,product.category].filter(Boolean).join(" / "))}</p></div><strong class="product-price">${product.price ? money(product.price) : "CONSULTE"}</strong></div><button class="product-buy" type="button" data-details="${escapeHTML(String(product.id))}">VER DETALHES ↗</button>`;
-    productGrid.appendChild(card);
+    const detailsUrl = `product.html?id=${encodeURIComponent(String(product.id))}`;
+    card.innerHTML = `<a class="product-card-link" href="${detailsUrl}" target="_blank" rel="noopener" aria-label="Ver detalhes de ${escapeHTML(product.name||"produto")}"><div class="product-image">${image}</div><div class="product-info"><div><h3>${escapeHTML(product.name||"Produto")}</h3><p>${escapeHTML([product.brand,product.category].filter(Boolean).join(" / "))}</p></div><strong class="product-price">${product.price ? money(product.price) : "CONSULTE"}</strong></div><span class="product-buy">VER DETALHES ↗</span></a>`;
+
   });
   productGrid.querySelectorAll("[data-details]").forEach(button=>button.addEventListener("click",()=>showProductDetails(button.dataset.details)));
 }
