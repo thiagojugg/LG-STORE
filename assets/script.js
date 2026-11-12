@@ -17,7 +17,8 @@ async function loadProducts(){
     const response = await fetch("products.json",{cache:"no-store"});
     if(!response.ok) throw new Error("Não foi possível carregar o catálogo");
     const data = await response.json();
-    products = Array.isArray(data) ? data : [];
+    // Os produtos novos são cadastrados no final de products.json; inverter a ordem mantém o mais recente primeiro.
+    products = (Array.isArray(data) ? data : []).reverse();
     renderProducts(products);
   }catch(error){
     console.error(error);
