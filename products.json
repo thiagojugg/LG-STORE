@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "id": "boss-masculina",
+    "name": "CAMISETA BOSS MASCULINA",
+    "brand": "BOSS",
+    "category": "Camisetas",
+    "description": "Camiseta masculina BOSS. Disponível nas cores preta e vermelha. Consulte a disponibilidade antes de finalizar seu pedido.",
+    "price": 0,
+    "image": "assets/DEB6D3A8-BFA5-4C34-A3CA-24908C3DFBE4.jpeg",
+    "images": [
+      "assets/DEB6D3A8-BFA5-4C34-A3CA-24908C3DFBE4.jpeg",
+      "assets/EC4D2BBF-FD25-42FC-B163-78C72B7D64AF.jpeg"
+    ],
+    "colors": [
+      "Preta",
+      "Vermelha"
+    ],
+    "sizes": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "availableSizes": [
+      "G"
+    ]
+  }
+]
