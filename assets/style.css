@@ -103,3 +103,8 @@
  .details-copy{padding:0}
  .details-copy h2{font-size:58px}
 }
+
+/* Card inteiro abre a página individual do produto em nova aba */
+.product-card-link{display:block;color:inherit}
+.product-card-link .product-buy{display:block;text-align:center}
+.product-card-link:hover .product-buy{background:#111;color:#fff}
