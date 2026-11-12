@@ -1,7 +1,9 @@
 const WHATSAPP_NUMBER = "5511958593868";
 const money = value => new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(value)||0);
 let products = [];
-let cart = [];
+const CART_KEY = "lg-store-cart";
+let cart = (()=>{try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch{return []}})();
+function saveCart(){localStorage.setItem(CART_KEY,JSON.stringify(cart));}
 
 const $ = selector => document.querySelector(selector);
 const productGrid = $("#product-grid");
@@ -66,23 +68,27 @@ function searchProducts(query){
 function addToCart(id){
   const product=products.find(item=>String(item.id)===String(id));
   if(!product)return;
-  const existing=cart.find(item=>String(item.id)===String(id));
-  if(existing)existing.quantity+=1;else cart.push({...product,quantity:1});
+  const color=(product.colors||[])[0]||"";
+  const size=(product.availableSizes||["G"])[0]||"";
+  const key=[product.id,color,size].join("|");
+  const existing=cart.find(item=>item.key===key);
+  if(existing)existing.quantity+=1;else cart.push({...product,key,color,size,quantity:1});
+  saveCart();
   renderCart();
   openBag();
 }
 function renderCart(){
   $("#bag-count").textContent=cart.reduce((sum,item)=>sum+item.quantity,0);
-  $("#bag-items").innerHTML=cart.length?cart.map(item=>`<div class="bag-row"><div><strong>${escapeHTML(item.name)}</strong><p>Qtd: ${item.quantity} · ${money(item.price)}</p></div><div><strong>${money(item.price*item.quantity)}</strong><br><button data-remove="${escapeHTML(String(item.id))}">REMOVER</button></div></div>`).join(""):'<p class="bag-empty">Sua sacola está vazia.</p>';
+  $("#bag-items").innerHTML=cart.length?cart.map((item,index)=>`<div class="bag-row"><div><strong>${escapeHTML(item.name)}</strong><p>${escapeHTML(item.color||"")} · Tam. ${escapeHTML(item.size||"")} · Qtd: ${item.quantity}</p></div><div><strong>${money(item.price*item.quantity)}</strong><br><button data-remove="${index}">REMOVER</button></div></div>`).join(""):'<p class="bag-empty">Sua sacola está vazia.</p>';
   $("#bag-total").textContent=money(cart.reduce((sum,item)=>sum+Number(item.price||0)*item.quantity,0));
   $("#checkout-button").disabled=!cart.length;
-  $("#bag-items").querySelectorAll("[data-remove]").forEach(button=>button.addEventListener("click",()=>{cart=cart.filter(item=>String(item.id)!==button.dataset.remove);renderCart();}));
+  $("#bag-items").querySelectorAll("[data-remove]").forEach(button=>button.addEventListener("click",()=>{cart.splice(Number(button.dataset.remove),1);saveCart();renderCart();}));
 }
 function openBag(){$("#sacola").classList.add("open");$("#drawer-backdrop").classList.add("visible");}
 function closeBag(){$("#sacola").classList.remove("open");$("#drawer-backdrop").classList.remove("visible");}
 function checkout(){
   if(!cart.length)return;
-  const lines=cart.map(item=>`• ${item.name} | Qtd: ${item.quantity} | ${money(item.price*item.quantity)}`);
+  const lines=cart.map(item=>`• ${item.name} | Cor: ${item.color||"a definir"} | Tamanho: ${item.size||"a definir"} | Qtd: ${item.quantity} | ${money(item.price*item.quantity)}`);
   const total=cart.reduce((sum,item)=>sum+Number(item.price||0)*item.quantity,0);
   const message=`Olá! Vim pelo site da L&G STORE e gostaria de fazer este pedido:\\n\\n${lines.join("\\n")}\\n\\n*Subtotal: ${money(total)}*\\n\\nPodem me informar as opções de pagamento e entrega?`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,"_blank","noopener");
@@ -99,4 +105,6 @@ $("#menu-toggle").addEventListener("click",()=>{const menu=$("#mobile-menu");men
 $("#mobile-menu").querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>$("#mobile-menu").classList.remove("open")));
 $("#clear-filter").addEventListener("click",()=>{renderProducts(products);$("#clear-filter").hidden=true;});
 document.querySelectorAll("[data-category]").forEach(link=>link.addEventListener("click",()=>{const category=link.dataset.category;const filtered=products.filter(product=>String(product.category||"").toLocaleLowerCase("pt-BR").includes(category.toLocaleLowerCase("pt-BR")));renderProducts(filtered);$("#clear-filter").hidden=false;}));
+window.addEventListener("storage",event=>{if(event.key===CART_KEY){cart=(()=>{try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch{return []}})();renderCart();}});
+renderCart();
 loadProducts();
