@@ -112,3 +112,16 @@
 
 /* Preço promocional */
 .product-price{display:flex;flex-direction:column;align-items:flex-end;gap:6px;white-space:nowrap}.price-real,.price-promo{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.price-real small,.price-promo small{font-size:7px;letter-spacing:1px;font-weight:700;color:#777}.price-old{font-size:9px;color:#888;text-decoration:line-through;font-weight:500}.price-promo{background:#111;color:#fff;padding:6px 8px}.price-promo small{color:#c5c5c5}.price-current{font-size:13px;font-weight:900;color:#fff}
+
+
+/* Tipografia mais equilibrada nos cards de categorias */
+.category-card strong,
+.silver-card strong{font-size:clamp(27px,3.4vw,44px);line-height:.9;letter-spacing:-.5px}
+.category-card strong span,
+.silver-card strong span{font-size:15px;margin-left:5px}
+@media(max-width:760px){
+  .category-card strong,
+  .silver-card strong{font-size:clamp(24px,6.8vw,36px);line-height:.92;letter-spacing:-.3px}
+  .category-card strong span,
+  .silver-card strong span{font-size:13px;margin-left:4px}
+}
