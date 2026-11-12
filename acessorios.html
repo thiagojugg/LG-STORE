@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="Prata e acessórios — L&G STORE.">
+  <title>Prata & Acessórios — L&G STORE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="announcement">L&amp;G STORE • PRATA &amp; ACESSÓRIOS <span>—</span> DETALHES QUE FAZEM PRESENÇA</div>
+  <header class="site-header">
+    <a class="wordmark" href="index.html" aria-label="L&G Store início">L&amp;G<span>®</span><small>STORE</small></a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="index.html">INÍCIO</a>
+      <a href="#colecoes">COLEÇÕES</a>
+      <a href="#catalogo">PRODUTOS</a>
+    </nav>
+    <div class="header-actions">
+      <a class="bag-link" href="index.html#sacola">VOLTAR À LOJA ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="silver-section" id="colecoes">
+      <div class="silver-inner">
+        <div class="silver-heading">
+          <div><p class="eyebrow dark-eyebrow">L&amp;G STORE / DEPARTAMENTO EXCLUSIVO</p><h2>PRATA &amp;<br><span>ACESSÓRIOS.</span></h2></div>
+          <p>DETALHES QUE<br>FAZEM PRESENÇA.</p>
+        </div>
+        <div class="silver-intro"><span>PRATA • CORRENTES • PULSEIRAS</span><p>Uma seleção dedicada aos acessórios que completam sua identidade. Escolha uma coleção e encontre sua peça.</p></div>
+        <div class="silver-grid">
+          <a class="silver-card silver-prata" href="#catalogo" data-filter="Prata"><span>01 / COLEÇÃO</span><strong>PRATA<span>↗</span></strong><small>PEÇAS EM PRATA</small></a>
+          <a class="silver-card silver-correntes" href="#catalogo" data-filter="Correntes"><span>02 / COLEÇÃO</span><strong>CORRENTES<span>↗</span></strong><small>NO SEU PRÓPRIO ELO</small></a>
+          <a class="silver-card silver-pulseiras" href="#catalogo" data-filter="Pulseiras"><span>03 / COLEÇÃO</span><strong>PULSEIRAS<span>↗</span></strong><small>DETALHES NO PULSO</small></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section products-section" id="catalogo">
+      <div class="section-heading products-heading"><div><p class="eyebrow dark-eyebrow">NOSSA SELEÇÃO / 01</p><h2>ENCONTRE SUA<br><span>PEÇA.</span></h2></div><p class="section-note">Prata e acessórios selecionados<br>para completar seu estilo.</p></div>
+      <div class="product-toolbar"><span id="accessory-count">CARREGANDO PRODUTOS...</span><button id="show-all" class="text-button" hidden>VER TODOS ×</button></div>
+      <div class="product-grid" id="accessory-grid"></div>
+      <div class="catalog-empty" id="accessory-empty" hidden><span class="empty-mark">L&amp;G</span><h3>NOVIDADES<br>EM BREVE.</h3><p>Estamos preparando esta seleção. Fale com a L&amp;G para consultar disponibilidade.</p><a class="button button-dark" href="https://wa.me/5511958593868" target="_blank" rel="noopener">FALAR COM A L&amp;G ↗</a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-logo" href="index.html">L&amp;G<span>®</span></a>
+    <div class="footer-center"><span>MODA URBANA / MULTIMARCAS</span><span>© 2026 L&amp;G STORE. TODOS OS DIREITOS RESERVADOS.</span></div>
+    <a class="footer-contact" href="https://wa.me/5511958593868" target="_blank" rel="noopener">WHATSAPP ↗</a>
+  </footer>
+  <script>
+    const money=value=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(value)||0);
+    const escapeHTML=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+    let allProducts=[];
+    let activeFilter="";
+    const grid=document.querySelector("#accessory-grid");
+    function renderAccessories(){
+      const terms=["acessório","prata","corrente","pulseira"];
+      const list=allProducts.filter(p=>{
+        const category=String(p.category||"").toLocaleLowerCase("pt-BR");
+        const name=String(p.name||"").toLocaleLowerCase("pt-BR");
+        const isAccessory=terms.some(term=>category.includes(term)||name.includes(term));
+        return isAccessory&&(!activeFilter||category.includes(activeFilter.toLocaleLowerCase("pt-BR"))||name.includes(activeFilter.toLocaleLowerCase("pt-BR")));
+      });
+      document.querySelector("#accessory-count").textContent="CATÁLOGO / "+String(list.length).padStart(2,"0")+" PRODUTOS";
+      document.querySelector("#accessory-empty").hidden=list.length>0;
+      grid.innerHTML=list.map(p=>'<article class="product-card"><a class="product-card-link" href="product.html?id='+encodeURIComponent(p.id)+'" target="_blank" rel="noopener"><div class="product-image">'+(p.image?'<img src="'+escapeHTML(p.image)+'" alt="'+escapeHTML(p.name)+'" loading="lazy">':'<span class="product-placeholder">L&amp;G</span>')+'</div><div class="product-info"><div><h3>'+escapeHTML(p.name||"Produto")+'</h3><p>'+escapeHTML([p.brand,p.category].filter(Boolean).join(" / "))+'</p></div><strong class="product-price">'+(p.originalPrice?'<span class="price-real"><small>VALOR REAL</small><del class="price-old">'+money(p.originalPrice)+'</del></span>':'')+'<span class="price-promo"><small>'+(p.originalPrice?'VALOR PROMOCIONAL':'VALOR')+'</small><strong class="price-current">'+money(p.price)+'</strong></span></strong></div><span class="product-buy">VER DETALHES ↗</span></a></article>').join("");
+      document.querySelector("#show-all").hidden=!activeFilter;
+    }
+    fetch("products.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new Error("Catálogo indisponível");return response.json();}).then(data=>{allProducts=Array.isArray(data)?data:[];renderAccessories();}).catch(()=>{document.querySelector("#accessory-count").textContent="CATÁLOGO INDISPONÍVEL";document.querySelector("#accessory-empty").hidden=false;});
+    document.querySelectorAll("[data-filter]").forEach(link=>link.addEventListener("click",()=>{activeFilter=link.dataset.filter;renderAccessories();}));
+    document.querySelector("#show-all").addEventListener("click",()=>{activeFilter="";renderAccessories();});
+  </script>
+</body>
+</html>
