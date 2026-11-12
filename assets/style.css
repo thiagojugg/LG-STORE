@@ -357,3 +357,26 @@ main>section:nth-of-type(4){animation-delay:.18s}
   main>section,.ticker,.site-footer{animation:none}
   .product-image img,.details-gallery img,.detail-main-image,.category-card:before,.silver-card:before{transition:none}
 }
+
+
+/* Carrossel horizontal de marcas abaixo do banner */
+.brand-section{padding:38px 8% 48px;background:var(--paper);border-bottom:1px solid var(--line)}
+.brand-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.brand-heading .eyebrow{margin:0}
+.brand-heading>span{font-size:8px;letter-spacing:1.5px;font-weight:700;color:#777}
+.brand-carousel{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(190px,1fr);grid-auto-columns:1fr;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.brand-card{min-width:0;min-height:118px;padding:16px 18px;background:#e8e8e5;border:1px solid #d4d4d0;color:#111;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;text-align:left;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.brand-card:hover,.brand-card:focus-visible{background:#111;color:#fff;border-color:#111;transform:translateY(-3px);outline:none}
+.brand-symbol{font-family:Arial,sans-serif;font-size:clamp(25px,3.2vw,39px);font-weight:900;letter-spacing:-1.5px;line-height:1}
+.brand-adidas .brand-symbol{font-style:italic;letter-spacing:-2px}
+.brand-nike .brand-symbol{font-style:italic;letter-spacing:-2px}
+.brand-dg .brand-symbol{letter-spacing:-3px}
+.brand-boss .brand-symbol{letter-spacing:2px}
+.brand-card small{font-size:8px;letter-spacing:1.2px;font-weight:700}
+@media(max-width:760px){
+ .brand-section{padding:30px 6% 36px}
+ .brand-heading{align-items:flex-start;flex-direction:column;gap:8px;margin-bottom:14px}
+ .brand-carousel{display:flex;overflow-x:auto;gap:9px;padding:2px 1px 12px;scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+ .brand-card{flex:0 0 72%;min-height:108px;scroll-snap-align:start}
+ .brand-symbol{font-size:34px}
+}
