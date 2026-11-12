@@ -359,28 +359,34 @@ main>section:nth-of-type(4){animation-delay:.18s}
 }
 
 
-/* Carrossel horizontal de marcas abaixo do banner */
-.brand-section{padding:38px 8% 48px;background:var(--paper);border-bottom:1px solid var(--line)}
-.brand-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+/* Carrossel de marcas com esferas 3D */
+.brand-section{padding:34px 8% 42px;background:var(--paper);border-bottom:1px solid var(--line)}
+.brand-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px}
 .brand-heading .eyebrow{margin:0}
 .brand-heading>span{font-size:8px;letter-spacing:1.5px;font-weight:700;color:#777}
-.brand-carousel{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(190px,1fr);grid-auto-columns:1fr;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.brand-card{min-width:0;min-height:118px;padding:16px 18px;background:#e8e8e5;border:1px solid #d4d4d0;color:#111;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;text-align:left;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s}
-.brand-card:hover,.brand-card:focus-visible{background:#111;color:#fff;border-color:#111;transform:translateY(-3px);outline:none}
-.brand-symbol{font-family:Arial,sans-serif;font-size:clamp(25px,3.2vw,39px);font-weight:900;letter-spacing:-1.5px;line-height:1}
-.brand-adidas .brand-symbol{font-style:italic;letter-spacing:-2px}
-.brand-nike .brand-symbol{font-style:italic;letter-spacing:-2px}
-.brand-dg .brand-symbol{letter-spacing:-3px}
-.brand-boss .brand-symbol{letter-spacing:2px}
-.brand-card small{font-size:8px;letter-spacing:1.2px;font-weight:700}
+.brand-carousel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.brand-card{min-width:0;padding:5px 8px 8px;background:transparent;border:0;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;text-align:center;cursor:pointer;transition:transform .28s ease,opacity .25s ease}
+.brand-orb{position:relative;width:clamp(86px,10vw,124px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 32% 24%,#fff 0%,#f8f8f8 8%,#d9d9d9 24%,#969696 52%,#424242 78%,#171717 100%);border:1px solid rgba(255,255,255,.8);box-shadow:inset -9px -12px 19px rgba(0,0,0,.48),inset 5px 6px 12px rgba(255,255,255,.88),0 10px 18px rgba(0,0,0,.2),0 3px 5px rgba(0,0,0,.12);transition:transform .3s ease,box-shadow .3s ease}
+.brand-orb:before{content:"";position:absolute;inset:7% 13% auto;height:34%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,0));filter:blur(5px);pointer-events:none}
+.brand-orb:after{content:"";position:absolute;inset:4px;border-radius:50%;border:1px solid rgba(255,255,255,.45);pointer-events:none}
+.brand-symbol{position:relative;z-index:1;font-family:Arial,Helvetica,sans-serif;color:#171717;font-size:clamp(19px,2.6vw,29px);font-weight:900;line-height:1;letter-spacing:-1.8px;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.adidas-mark{font-style:italic;letter-spacing:-2px}
+.nike-mark{font-style:italic;letter-spacing:-2px}
+.dg-mark{font-family:Georgia,serif;font-size:clamp(25px,3vw,36px);letter-spacing:-3px}
+.boss-mark{font-size:clamp(19px,2.5vw,28px);letter-spacing:1px}
+.brand-card small{font-size:8px;letter-spacing:1.35px;font-weight:700;color:#444}
+.brand-card:hover:not(:disabled),.brand-card:focus-visible:not(:disabled){transform:translateY(-5px);outline:none}
+.brand-card:hover:not(:disabled) .brand-orb,.brand-card:focus-visible:not(:disabled) .brand-orb{transform:scale(1.06);box-shadow:inset -10px -13px 20px rgba(0,0,0,.5),inset 6px 7px 13px rgba(255,255,255,.95),0 15px 24px rgba(0,0,0,.25),0 4px 7px rgba(0,0,0,.15)}
 @media(max-width:760px){
- .brand-section{padding:30px 6% 36px}
+ .brand-section{padding:28px 6% 34px}
  .brand-heading{align-items:flex-start;flex-direction:column;gap:8px;margin-bottom:14px}
- .brand-carousel{display:flex;overflow-x:auto;gap:9px;padding:2px 1px 12px;scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
- .brand-card{flex:0 0 72%;min-height:108px;scroll-snap-align:start}
- .brand-symbol{font-size:34px}
+ .brand-carousel{display:flex;overflow-x:auto;gap:18px;padding:6px 2px 15px;scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+ .brand-card{flex:0 0 104px;scroll-snap-align:center;gap:10px}
+ .brand-orb{width:88px}
+ .brand-symbol{font-size:22px}
+ .dg-mark{font-size:29px}
+ .boss-mark{font-size:21px}
 }
-
 /* Marcas sem produtos cadastrados ficam inativas no carrossel */
 .brand-card.is-inactive,
 .brand-card:disabled{opacity:.32;cursor:default;pointer-events:none;transform:none;filter:grayscale(1)}
