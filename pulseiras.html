@@ -41,7 +41,7 @@
   <script>
     const money=value=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(value)||0);
     const escapeHTML=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
-    const terms="[\"pulseira\"]";
+    const terms=["pulseira"];
     const grid=document.querySelector("#item-grid");
     fetch("products.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new Error("Catálogo indisponível");return response.json();}).then(data=>{
       const products=(Array.isArray(data)?data:[]).filter(product=>{
