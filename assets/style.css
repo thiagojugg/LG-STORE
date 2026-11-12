@@ -292,3 +292,23 @@
 /* Banner principal — redução sutil da altura */
 .hero{min-height:540px}
 @media(max-width:760px){.hero{min-height:590px}}
+
+
+/* Transição fluida entre páginas/abas internas da loja */
+@view-transition{navigation:auto}
+::view-transition-old(root){
+  animation:lg-page-out .22s ease both;
+}
+::view-transition-new(root){
+  animation:lg-page-in .38s cubic-bezier(.22,.7,.25,1) both;
+}
+@keyframes lg-page-out{
+  to{opacity:0;filter:blur(2px);transform:translateY(-5px)}
+}
+@keyframes lg-page-in{
+  from{opacity:0;filter:blur(2px);transform:translateY(8px)}
+  to{opacity:1;filter:blur(0);transform:translateY(0)}
+}
+@media(prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+}
