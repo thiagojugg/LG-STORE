@@ -1,4 +1,5 @@
-const WHATSAPP_NUMBER = "5511958593868";
+const INSTAGRAM_DM_URL = "https://ig.me/m/lgstore.20.26";
+function openInstagramWithMessage(message){window.open(INSTAGRAM_DM_URL,"_blank","noopener");if(navigator.clipboard?.writeText)navigator.clipboard.writeText(message).catch(()=>{});}
 const money = value => new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(value)||0);
 let products = [];
 const CART_KEY = "lg-store-cart";
@@ -53,7 +54,7 @@ function showProductDetails(id){
   section.scrollIntoView({behavior:"smooth",block:"start"});
   $("#details-back").addEventListener("click",()=>{section.hidden=true;$("#novidades").hidden=false;$("#novidades").scrollIntoView({behavior:"smooth"});});
   section.querySelectorAll("[data-color]").forEach(button=>button.addEventListener("click",()=>{selectedProductColor=button.dataset.color;section.querySelectorAll("[data-color]").forEach(item=>item.classList.toggle("active",item===button));$("#selected-color").textContent=selectedProductColor.toUpperCase();}));
-  $("#details-buy").addEventListener("click",()=>{const message=`Olá! Tenho interesse na ${product.name}, cor ${selectedProductColor}, tamanho G. Ainda está disponível?`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,"_blank","noopener");});
+  $("#details-buy").addEventListener("click",()=>{const message=`Olá! Tenho interesse na ${product.name}, cor ${selectedProductColor}, tamanho G. Ainda está disponível?`;openInstagramWithMessage(message);});
 }
 function escapeHTML(value){
   return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
