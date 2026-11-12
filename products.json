@@ -79,5 +79,33 @@
       "G"
     ],
     "originalPrice": 99.9
+  },
+  {
+    "id": "colar-brinco-kit-ponto-luz",
+    "name": "COLAR + BRINCO KIT PONTO DE LUZ FEMININO",
+    "brand": "L&G STORE",
+    "category": "Kit Girl",
+    "description": "Conjunto feminino com colar e brinco em Prata 925 autêntica. Não escurece, não dá alergia e tem brilho eterno. A pronta entrega, com caixinha vermelha luxo e garantia. Envio imediato para todo o Brasil. Até 12x no cartão.",
+    "price": 130,
+    "originalPrice": 189.9,
+    "image": "assets/IMG_3760.png",
+    "images": [
+      "assets/IMG_3760.png",
+      "assets/IMG_3761.png",
+      "assets/IMG_3762.png",
+      "assets/IMG_3763.png"
+    ],
+    "colors": [
+      "Ponto de Luz Esmeralda",
+      "Ponto de Luz Verde Claro",
+      "Coração Azul",
+      "Ponto de Luz Vermelho"
+    ],
+    "sizes": [
+      "Único"
+    ],
+    "availableSizes": [
+      "Único"
+    ]
   }
 ]
