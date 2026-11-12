@@ -4,7 +4,7 @@
     "name": "CAMISETA BOSS MASCULINA",
     "brand": "BOSS",
     "category": "Camisetas",
-    "description": "Camiseta masculina BOSS. Disponível nas cores preta e vermelha. Consulte a disponibilidade antes de finalizar seu pedido.",
+    "description": "Camiseta masculina BOSS. Disponível nas cores preta e vermelha.",
     "price": 79.9,
     "image": "assets/DEB6D3A8-BFA5-4C34-A3CA-24908C3DFBE4.jpeg",
     "images": [
@@ -22,7 +22,10 @@
       "GG"
     ],
     "availableSizes": [
-      "G"
+      "P",
+      "M",
+      "G",
+      "GG"
     ],
     "originalPrice": 99.9
   },
@@ -31,7 +34,7 @@
     "name": "CAMISETA D&G DOLCE & GABBANA MASCULINA",
     "brand": "DOLCE & GABBANA",
     "category": "Camisetas",
-    "description": "Camisa masculina D&G Dolce & Gabbana. Disponível nas cores branca e azul marinho. Consulte a disponibilidade antes de finalizar seu pedido.",
+    "description": "Camisa masculina D&G Dolce & Gabbana. Disponível nas cores branca e azul marinho.",
     "price": 79.9,
     "image": "assets/7F0F3F4B-0413-4D7C-803E-3505C880237D.jpeg",
     "images": [
@@ -49,7 +52,10 @@
       "GG"
     ],
     "availableSizes": [
-      "G"
+      "P",
+      "M",
+      "G",
+      "GG"
     ],
     "originalPrice": 99.9
   },
@@ -58,7 +64,7 @@
     "name": "CAMISETA ADIDAS ESPORTIVA MASCULINA",
     "brand": "ADIDAS",
     "category": "Camisetas",
-    "description": "Camiseta Adidas esportiva masculina. Disponível nas cores branca e preta. Consulte a disponibilidade antes de finalizar seu pedido.",
+    "description": "Camiseta Adidas esportiva masculina. Disponível nas cores branca e preta.",
     "price": 79.9,
     "image": "assets/EE52E280-35F9-4045-93C1-825B0A14C88A.jpeg",
     "images": [
@@ -76,7 +82,10 @@
       "GG"
     ],
     "availableSizes": [
-      "G"
+      "P",
+      "M",
+      "G",
+      "GG"
     ],
     "originalPrice": 99.9
   },
