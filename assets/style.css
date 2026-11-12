@@ -380,3 +380,7 @@ main>section:nth-of-type(4){animation-delay:.18s}
  .brand-card{flex:0 0 72%;min-height:108px;scroll-snap-align:start}
  .brand-symbol{font-size:34px}
 }
+
+/* Marcas sem produtos cadastrados ficam inativas no carrossel */
+.brand-card.is-inactive,
+.brand-card:disabled{opacity:.32;cursor:default;pointer-events:none;transform:none;filter:grayscale(1)}
