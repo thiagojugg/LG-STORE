@@ -174,3 +174,6 @@
 .silver-kits:before{background-image:linear-gradient(0deg,#1119,transparent 70%),url("Joias de Diamante em Estúdio Futurista.png")!important}
 @media(min-width:761px) and (max-width:1000px){.silver-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.silver-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.silver-card:last-child{grid-column:auto;min-height:220px}.silver-kits strong{font-size:clamp(21px,5.7vw,32px);white-space:normal}}
+
+/* Alinhamento uniforme das quatro coleções de acessórios */
+.silver-grid{grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch}.silver-card{min-width:0;min-height:290px}.silver-kits strong{white-space:nowrap}@media(min-width:761px) and (max-width:1050px){.silver-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){.silver-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.silver-card{min-height:220px;padding:14px}.silver-kits strong{font-size:clamp(22px,6vw,34px);white-space:nowrap}}
