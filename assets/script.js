@@ -20,6 +20,7 @@ async function loadProducts(){
     const data = await response.json();
     // Os produtos novos são cadastrados no final de products.json; inverter a ordem mantém o mais recente primeiro.
     products = (Array.isArray(data) ? data : []).reverse();
+    updateBrandButtons();
     renderProducts(products);
   }catch(error){
     console.error(error);
@@ -107,16 +108,29 @@ $("#bag-close").addEventListener("click",closeBag);
 $("#drawer-backdrop").addEventListener("click",closeBag);
 $("#checkout-button").addEventListener("click",checkout);
 $("#clear-filter").addEventListener("click",()=>{renderProducts(products);$("#clear-filter").hidden=true;});
-document.querySelectorAll("[data-brand]").forEach(button=>button.addEventListener("click",()=>{
+function getProductsByBrand(button){
   const brand=button.dataset.brand.toLocaleLowerCase("pt-BR");
-  const filtered=products.filter(product=>{
+  return products.filter(product=>{
     const productBrand=String(product.brand||"").toLocaleLowerCase("pt-BR");
     const productName=String(product.name||"").toLocaleLowerCase("pt-BR");
     if(brand==="d&g")return productBrand.includes("dolce")||productBrand==="d&g"||productName.includes("d&g")||productName.includes("dolce & gabbana");
     return productBrand===brand||productName.includes(brand);
   });
+}
+function updateBrandButtons(){
+  document.querySelectorAll("[data-brand]").forEach(button=>{
+    const hasProducts=getProductsByBrand(button).length>0;
+    button.disabled=!hasProducts;
+    button.classList.toggle("is-inactive",!hasProducts);
+    button.setAttribute("aria-disabled",String(!hasProducts));
+    button.tabIndex=hasProducts?0:-1;
+  });
+}
+document.querySelectorAll("[data-brand]").forEach(button=>button.addEventListener("click",()=>{
+  const filtered=getProductsByBrand(button);
+  if(!filtered.length)return;
   renderProducts(filtered);
-  $("#clear-filter").hidden=filtered.length===products.length;
+  $("#clear-filter").hidden=false;
   $("#novidades").scrollIntoView({behavior:"smooth",block:"start"});
 }));
 document.querySelectorAll("[data-category]").forEach(link=>link.addEventListener("click",()=>{const category=link.dataset.category;const filtered=products.filter(product=>String(product.category||"").toLocaleLowerCase("pt-BR").includes(category.toLocaleLowerCase("pt-BR")));renderProducts(filtered);$("#clear-filter").hidden=false;}));
