@@ -21,6 +21,15 @@
   <section class="detail-bag-drawer" id="detail-bag" aria-label="Sacola de compras"><div class="detail-bag-head"><div><p class="eyebrow dark-eyebrow">SUA SELEÇÃO</p><h2>SUA SACOLA<span>.</span></h2></div><button class="close-button" id="detail-bag-close" type="button" aria-label="Fechar sacola">✕</button></div><div class="detail-bag-items" id="detail-bag-items"><p class="bag-empty">Sua sacola está vazia.</p></div><div class="detail-bag-footer"><div class="detail-bag-total"><span>SUBTOTAL</span><strong id="detail-bag-total">R$ 0,00</strong></div><button class="detail-bag-checkout" id="detail-bag-checkout" type="button" disabled>FINALIZAR PELO WHATSAPP ↗</button><p class="detail-bag-note">O pedido será enviado para atendimento via WhatsApp.</p></div></section><div class="detail-bag-backdrop" id="detail-bag-backdrop"></div>
   <script>
     const WHATSAPP_NUMBER = "5511958593868";
+    const SUPABASE_URL = "https://ddbhgmwiovvmiopsfrdk.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_8CFQePirZ6VSBACCW0tTZA_q-u2yrZd";
+    const SUPABASE_HEADERS = {"apikey":SUPABASE_PUBLISHABLE_KEY,"Authorization":"Bearer "+SUPABASE_PUBLISHABLE_KEY};
+    function getReviewerKey(){
+      const keyName="lg-store-reviewer-v1";
+      let key=localStorage.getItem(keyName);
+      if(!key){key=crypto.randomUUID();localStorage.setItem(keyName,key);}
+      return key;
+    }
     const params = new URLSearchParams(window.location.search);
     const productId = params.get("id");
     const root = document.getElementById("product-detail");
@@ -91,10 +100,11 @@
       chosenImage=imageForColor(chosenColor);
       document.title=product.name+" — L&G STORE";
       root.innerHTML=`<button class="details-back" id="detail-back">← VOLTAR À LOJA</button><div class="detail-page-layout"><div class="detail-gallery" id="detail-gallery"><img id="detail-main-image" class="detail-main-image" src="${safe(chosenImage)}" alt="${safe(product.name)} — ${safe(chosenColor)}" draggable="false"><div class="detail-gallery-nav" hidden><button type="button" id="detail-prev" aria-label="Imagem anterior">‹</button><button type="button" id="detail-next" aria-label="Próxima imagem">›</button></div><span class="detail-gallery-count" id="detail-gallery-count">01 / ${String(productImages.length).padStart(2,"0")}</span></div><section class="detail-info"><p class="eyebrow dark-eyebrow">L&amp;G STORE / SELEÇÃO</p><h1>${safe(product.name)}</h1><p class="detail-description">${safe(product.description||"Escolha a cor e confira a disponibilidade de tamanho.")}</p><div class="detail-rating" aria-label="Avaliação do produto"><span class="detail-rating-title">AVALIE ESTE PRODUTO</span><div class="detail-rating-stars" id="detail-rating-stars" role="group" aria-label="Escolha uma nota de 1 a 5 estrelas">${[1,2,3,4,5].map(value=>`<button class="detail-rating-star" type="button" data-rating="${value}" aria-label="${value} ${value===1?"estrela":"estrelas"}" aria-pressed="false">★</button>`).join("")}</div><p class="detail-rating-feedback" id="detail-rating-feedback" aria-live="polite">Toque nas estrelas para avaliar.</p></div>${product.price?'<div class="detail-price">'+(product.originalPrice?'<span class="detail-real"><small>VALOR REAL</small><del>'+money(product.originalPrice)+'</del></span><span class="detail-promo"><small>VALOR PROMOCIONAL</small><strong>'+money(product.price)+'</strong></span>':'<span class="detail-promo"><small>VALOR</small><strong>'+money(product.price)+'</strong></span>')+'</div>':""}<div class="detail-option"><label>COR <b id="detail-selected-color">${safe(chosenColor.toUpperCase())}</b></label><div class="detail-choice-list">${colors.map((color,index)=>`<button class="detail-choice ${index===0?"active":""}" type="button" data-color="${safe(color)}">${safe(color)}</button>`).join("")}</div></div><div class="detail-option"><label>TAMANHO <b id="detail-size-status">SELECIONE</b></label><div class="detail-choice-list">${(product.sizes||["P","M","G","GG"]).map(size=>`<button class="detail-choice ${availableSizes.includes(size)?"available":""}" type="button" data-size="${safe(size)}" ${availableSizes.includes(size)?"":"disabled"}>${safe(size)}${availableSizes.includes(size)?"":" · ESGOTADO"}</button>`).join("")}</div></div><p class="detail-stock" id="detail-stock-note">${availableSizes.length?("Disponível nos tamanhos: "+availableSizes.join(", ")+"."):"Consulte a disponibilidade pelo WhatsApp."}</p><p class="detail-added-note" id="detail-added-note" hidden>Produto adicionado à sua sacola.</p><button class="detail-add-bag" id="detail-add-bag" type="button">ADICIONAR À SACOLA +</button><button class="detail-whatsapp" id="detail-buy" type="button">COMPRAR PELO WHATSAPP ↗</button></section></div>`;
-      const ratingKey="lg-store-rating-"+product.id;
-      let savedRating=Number(localStorage.getItem(ratingKey)||0);
+      const reviewerKey=getReviewerKey();
       const ratingButtons=[...document.querySelectorAll("[data-rating]")];
       const ratingFeedback=document.getElementById("detail-rating-feedback");
+      const ratingTitle=document.querySelector(".detail-rating-title");
+      let savedRating=0;
       function paintRating(value){
         ratingButtons.forEach(button=>{
           const active=Number(button.dataset.rating)<=value;
@@ -102,14 +112,51 @@
           button.setAttribute("aria-pressed",String(Number(button.dataset.rating)===value));
         });
       }
-      paintRating(savedRating);
-      if(savedRating)ratingFeedback.textContent="SUA AVALIAÇÃO: "+savedRating+"/5 — obrigado!";
-      ratingButtons.forEach(button=>button.addEventListener("click",()=>{
-        savedRating=Number(button.dataset.rating);
-        localStorage.setItem(ratingKey,String(savedRating));
-        paintRating(savedRating);
-        ratingFeedback.textContent="SUA AVALIAÇÃO: "+savedRating+"/5 — obrigado!";
+      async function loadProductRatings(){
+        try{
+          const response=await fetch(SUPABASE_URL+"/rest/v1/product_reviews?select=rating,reviewer_key&product_id=eq."+encodeURIComponent(String(product.id)),{headers:SUPABASE_HEADERS,cache:"no-store"});
+          if(!response.ok)throw new Error("Não foi possível consultar as avaliações.");
+          const rows=await response.json();
+          const count=rows.length;
+          const average=count?rows.reduce((sum,row)=>sum+Number(row.rating||0),0)/count:0;
+          ratingTitle.textContent=count?"AVALIAÇÃO DOS CLIENTES":"SEJA O PRIMEIRO A AVALIAR";
+          ratingFeedback.textContent=count?("★ "+average.toFixed(1).replace(".",",")+" / 5 · "+count+" "+(count===1?"avaliação":"avaliações")):"Ainda não há avaliações.";
+          const own=rows.find(row=>row.reviewer_key===reviewerKey);
+          if(own){
+            savedRating=Number(own.rating);
+            paintRating(savedRating);
+            ratingFeedback.textContent="SUA NOTA: "+savedRating+"/5 · "+(count?("MÉDIA "+average.toFixed(1).replace(".",",")+" · "+count+" "+(count===1?"avaliação":"avaliações")):"");
+            ratingButtons.forEach(button=>button.disabled=true);
+          }
+        }catch(error){
+          ratingFeedback.textContent="Não foi possível carregar as avaliações agora.";
+        }
+      }
+      ratingButtons.forEach(button=>button.addEventListener("click",async()=>{
+        if(savedRating)return;
+        const rating=Number(button.dataset.rating);
+        ratingButtons.forEach(item=>item.disabled=true);
+        ratingFeedback.textContent="ENVIANDO SUA AVALIAÇÃO...";
+        try{
+          const response=await fetch(SUPABASE_URL+"/rest/v1/product_reviews",{method:"POST",headers:{...SUPABASE_HEADERS,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({product_id:String(product.id),reviewer_key:reviewerKey,rating})});
+          if(!response.ok){
+            if(response.status===409){
+              ratingFeedback.textContent="Este navegador já enviou uma avaliação para este produto.";
+              await loadProductRatings();
+              return;
+            }
+            throw new Error("Falha ao salvar a avaliação.");
+          }
+          savedRating=rating;
+          paintRating(savedRating);
+          ratingFeedback.textContent="OBRIGADO! SUA NOTA: "+savedRating+"/5";
+          await loadProductRatings();
+        }catch(error){
+          ratingFeedback.textContent="Não foi possível salvar. Tente novamente.";
+          ratingButtons.forEach(item=>item.disabled=false);
+        }
       }));
+      loadProductRatings();
       chosenSize=availableSizes[0]||"";
       document.querySelectorAll("[data-size]").forEach(button=>button.addEventListener("click",()=>{chosenSize=button.dataset.size;document.querySelectorAll("[data-size]").forEach(item=>item.classList.toggle("active",item===button));document.getElementById("detail-size-status").textContent="TAMANHO "+chosenSize;}));
       document.getElementById("detail-add-bag").addEventListener("click",()=>{if(!chosenSize){document.getElementById("detail-stock-note").textContent="Este produto está sem tamanho disponível no momento.";return;}const key=[product.id,chosenColor,chosenSize].join("|");const existing=cart.find(item=>item.key===key);if(existing)existing.quantity+=1;else cart.push({key,id:product.id,name:product.name,price:Number(product.price)||0,color:chosenColor,size:chosenSize,quantity:1,image:chosenImage});saveCart();document.getElementById("detail-added-note").hidden=false;openBag();});
