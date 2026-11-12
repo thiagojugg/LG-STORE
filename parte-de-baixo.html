@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="Calças e bermudas disponíveis na L&G STORE.">
+  <title>Parte de Baixo — L&G STORE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="announcement">L&amp;G STORE • PARTE DE BAIXO <span>—</span> IDENTIDADE EM CADA PEÇA</div>
+  <header class="site-header">
+    <a class="wordmark" href="index.html" aria-label="L&G Store início">L&amp;G<span>®</span><small>STORE</small></a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="index.html">INÍCIO</a>
+      <a href="#catalogo">CALÇAS &amp; BERMUDAS</a>
+    </nav>
+    <div class="header-actions">
+      <a class="bag-link" href="index.html#sacola">VOLTAR À LOJA ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section products-section" id="catalogo">
+      <div class="section-heading products-heading"><div><p class="eyebrow dark-eyebrow">CATÁLOGO COMPLETO / 02</p><h2>PARTE DE<br><span>BAIXO.</span></h2></div><p class="section-note">Calças e bermudas para completar<br>sua identidade.</p></div>
+      <div class="product-toolbar"><span id="bottom-count">CARREGANDO PRODUTOS...</span></div>
+      <div class="product-grid" id="bottom-grid"></div>
+      <div class="catalog-empty" id="bottom-empty" hidden><span class="empty-mark">L&amp;G</span><h3>NOVIDADES<br>EM BREVE.</h3><p>No momento, não há calças ou bermudas cadastradas. Volte em breve para conferir as novidades.</p><a class="button button-dark" href="https://wa.me/5511958593868" target="_blank" rel="noopener">FALAR COM A L&amp;G ↗</a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-logo" href="index.html">L&amp;G<span>®</span></a>
+    <div class="footer-center"><span>MODA URBANA / MULTIMARCAS</span><span>© 2026 L&amp;G STORE. TODOS OS DIREITOS RESERVADOS.</span></div>
+    <a class="footer-contact" href="https://wa.me/5511958593868" target="_blank" rel="noopener">WHATSAPP ↗</a>
+  </footer>
+
+  <script>
+    const money=value=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(value)||0);
+    const escapeHTML=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+    const grid=document.querySelector("#bottom-grid");
+    fetch("products.json",{cache:"no-store"})
+      .then(response=>{if(!response.ok)throw new Error("Catálogo indisponível");return response.json();})
+      .then(data=>{
+        const products=Array.isArray(data)?data:[];
+        const bottoms=products.filter(product=>{
+          const category=String(product.category||"").toLocaleLowerCase("pt-BR");
+          const name=String(product.name||"").toLocaleLowerCase("pt-BR");
+          return ["calça","calcas","bermuda","shorts"].some(term=>category.includes(term)||name.includes(term));
+        });
+        document.querySelector("#bottom-count").textContent="CATÁLOGO / "+String(bottoms.length).padStart(2,"0")+" PRODUTOS";
+        document.querySelector("#bottom-empty").hidden=bottoms.length>0;
+        grid.innerHTML=bottoms.map(product=>'<article class="product-card"><a class="product-card-link" href="product.html?id='+encodeURIComponent(product.id)+'" target="_blank" rel="noopener"><div class="product-image">'+(product.image?'<img src="'+escapeHTML(product.image)+'" alt="'+escapeHTML(product.name)+'" loading="lazy">':'<span class="product-placeholder">L&amp;G</span>')+'</div><div class="product-info"><div><h3>'+escapeHTML(product.name||"Produto")+'</h3><p>'+escapeHTML([product.brand,product.category].filter(Boolean).join(" / "))+'</p></div><strong class="product-price">'+(product.originalPrice?'<span class="price-real"><small>VALOR REAL</small><del class="price-old">'+money(product.originalPrice)+'</del></span>':'')+'<span class="price-promo"><small>'+(product.originalPrice?'VALOR PROMOCIONAL':'VALOR')+'</small><strong class="price-current">'+money(product.price)+'</strong></span></strong></div><span class="product-buy">VER DETALHES ↗</span></a></article>').join("");
+      })
+      .catch(()=>{
+        document.querySelector("#bottom-count").textContent="CATÁLOGO INDISPONÍVEL";
+        document.querySelector("#bottom-empty").hidden=false;
+      });
+  </script>
+</body>
+</html>
