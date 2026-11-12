@@ -134,3 +134,11 @@
   .category-three strong{font-size:clamp(21px,5.6vw,29px);letter-spacing:-.5px}
   .category-three strong span{font-size:12px;margin-left:3px}
 }
+
+
+/* Imagem centralizada no card de Prata & Acessórios */
+.category-three:before{
+  background:
+    linear-gradient(0deg,rgba(0,0,0,.38),rgba(0,0,0,.08)),
+    url("Joias Prateadas Flutuando em Estúdio.png") center center / cover no-repeat;
+}
