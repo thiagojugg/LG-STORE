@@ -107,6 +107,18 @@ $("#bag-close").addEventListener("click",closeBag);
 $("#drawer-backdrop").addEventListener("click",closeBag);
 $("#checkout-button").addEventListener("click",checkout);
 $("#clear-filter").addEventListener("click",()=>{renderProducts(products);$("#clear-filter").hidden=true;});
+document.querySelectorAll("[data-brand]").forEach(button=>button.addEventListener("click",()=>{
+  const brand=button.dataset.brand.toLocaleLowerCase("pt-BR");
+  const filtered=products.filter(product=>{
+    const productBrand=String(product.brand||"").toLocaleLowerCase("pt-BR");
+    const productName=String(product.name||"").toLocaleLowerCase("pt-BR");
+    if(brand==="d&g")return productBrand.includes("dolce")||productBrand==="d&g"||productName.includes("d&g")||productName.includes("dolce & gabbana");
+    return productBrand===brand||productName.includes(brand);
+  });
+  renderProducts(filtered);
+  $("#clear-filter").hidden=filtered.length===products.length;
+  $("#novidades").scrollIntoView({behavior:"smooth",block:"start"});
+}));
 document.querySelectorAll("[data-category]").forEach(link=>link.addEventListener("click",()=>{const category=link.dataset.category;const filtered=products.filter(product=>String(product.category||"").toLocaleLowerCase("pt-BR").includes(category.toLocaleLowerCase("pt-BR")));renderProducts(filtered);$("#clear-filter").hidden=false;}));
 window.addEventListener("storage",event=>{if(event.key===CART_KEY){cart=(()=>{try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch{return []}})();renderCart();}});
 renderCart();
