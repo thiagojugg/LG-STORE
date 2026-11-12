@@ -36,3 +36,38 @@
  .silver-card:last-child{grid-column:span 2;min-height:190px}
  .silver-card strong{font-size:clamp(35px,9vw,52px)}
 }
+
+/* Silver department — unified with the L&G editorial layout */
+.silver-section{background:var(--paper);color:var(--black);padding:105px 8%;border-top:1px solid var(--line)}
+.silver-section:before{display:none}
+.silver-inner{max-width:none}
+.silver-heading{align-items:flex-end;border:0;padding:0;margin-bottom:42px}
+.silver-heading .eyebrow{color:#888;margin-bottom:18px}
+.silver-heading h2{font:900 clamp(58px,7vw,92px)/.8 var(--display);letter-spacing:-1.5px;margin:0}
+.silver-heading h2 span{color:#858585}
+.silver-heading>p{color:#777;font-size:11px;line-height:1.8;letter-spacing:1.2px;margin:0 0 4px}
+.silver-intro{border-top:1px solid #c9c9c5;padding:13px 0 22px}
+.silver-intro>span{color:#777;font-size:8px;letter-spacing:1.3px}
+.silver-intro p{color:#777;font-size:11px;line-height:1.8}
+.silver-grid{gap:13px}
+.silver-card{min-height:320px;padding:20px;border:0;background:#272727;isolation:isolate}
+.silver-card:before{opacity:.9}
+.silver-prata:before{background:linear-gradient(135deg,#999,#333 70%)}
+.silver-correntes:before{background:linear-gradient(135deg,#777,#252525 70%)}
+.silver-pulseiras:before{background:linear-gradient(135deg,#aaa,#333 72%)}
+.silver-card:after{background:linear-gradient(0deg,#0009,transparent 70%)}
+.silver-card>span,.silver-card small{font-size:8px;letter-spacing:1.5px;color:#d0d0d0}
+.silver-card strong{font:900 clamp(36px,5vw,65px)/.8 var(--display);letter-spacing:-1px}
+.silver-card strong span{font:400 19px var(--body);margin-left:8px}
+@media(max-width:760px){
+ .silver-section{padding:72px 6%}
+ .silver-heading{align-items:flex-start;flex-direction:column;gap:20px;margin-bottom:30px}
+ .silver-heading h2{font-size:70px}
+ .silver-heading>p{font-size:10px}
+ .silver-intro{align-items:flex-start;flex-direction:column;gap:10px;padding:13px 0 20px}
+ .silver-grid{grid-template-columns:1fr 1fr;gap:9px}
+ .silver-card{min-height:220px;padding:14px}
+ .silver-card:last-child{grid-column:span 2;min-height:245px}
+ .silver-card strong{font-size:clamp(36px,10vw,54px)}
+}
+@media(min-width:761px) and (max-width:1000px){.silver-section{padding-left:6%;padding-right:6%}.silver-card{min-height:260px}}
