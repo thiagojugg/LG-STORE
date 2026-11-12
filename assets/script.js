@@ -26,7 +26,7 @@ async function loadProducts(){
 
 function renderProducts(items){
   productGrid.innerHTML = "";
-  $("#product-count").textContent = `CATÁLOGO / ${String(items.length).padStart(2,"0")} ITENS`;
+  $("#product-count").textContent = `CATÁLOGO / ${String(items.length).padStart(2,"0")} PRODUTOS`;
   emptyState.hidden = items.length > 0;
   items.forEach(product=>{
     const card = document.createElement("article");
