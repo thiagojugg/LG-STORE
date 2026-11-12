@@ -66,6 +66,8 @@
       const list=allProducts.filter(p=>{
         const category=String(p.category||"").toLocaleLowerCase("pt-BR");
         const name=String(p.name||"").toLocaleLowerCase("pt-BR");
+        // KIT GIRL possui página própria e não deve aparecer em "Encontre sua peça".
+        if(category.includes("kit girl")||name.includes("kit girl"))return false;
         const isAccessory=terms.some(term=>category.includes(term)||name.includes(term));
         return isAccessory&&(!activeFilter||category.includes(activeFilter.toLocaleLowerCase("pt-BR"))||name.includes(activeFilter.toLocaleLowerCase("pt-BR")));
       });
