@@ -1,11 +1,11 @@
 # L&G STORE
 
-Loja multimarcas streetwear com identidade visual híbrida, em preto, cinza e branco.
+Loja multimarcas de moda urbana com identidade visual em preto, cinza e branco.
 
-## Estrutura
+## Estrutura do projeto
 - `index.html`: página principal.
 - `assets/style.css`: estilos responsivos.
-- `assets/script.js`: pesquisa, catálogo, sacola e finalização via WhatsApp.
+- `assets/script.js`: pesquisa, catálogo, sacola e finalização pelo WhatsApp.
 - `products.json`: catálogo de produtos.
 
 ## Configuração
@@ -31,5 +31,5 @@ Exemplo de estrutura (substitua pelos dados reais dos produtos):
 
 A busca consulta nome, marca, categoria e descrição. O carrinho monta o pedido e abre o WhatsApp com os itens e subtotal.
 
-## Publicação
+## Publicação do site
 Ative o GitHub Pages nas configurações do repositório, selecionando a branch `main` e a pasta `/(root)`.
