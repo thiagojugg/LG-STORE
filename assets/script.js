@@ -129,9 +129,8 @@ function updateBrandButtons(){
 document.querySelectorAll("[data-brand]").forEach(button=>button.addEventListener("click",()=>{
   const filtered=getProductsByBrand(button);
   if(!filtered.length)return;
-  renderProducts(filtered);
-  $("#clear-filter").hidden=false;
-  $("#novidades").scrollIntoView({behavior:"smooth",block:"start"});
+  const brand=encodeURIComponent(button.dataset.brand);
+  window.open(`marca.html?marca=${brand}`,"_blank","noopener");
 }));
 document.querySelectorAll("[data-category]").forEach(link=>link.addEventListener("click",()=>{const category=link.dataset.category;const filtered=products.filter(product=>String(product.category||"").toLocaleLowerCase("pt-BR").includes(category.toLocaleLowerCase("pt-BR")));renderProducts(filtered);$("#clear-filter").hidden=false;}));
 window.addEventListener("storage",event=>{if(event.key===CART_KEY){cart=(()=>{try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch{return []}})();renderCart();}});
