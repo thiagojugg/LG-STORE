@@ -25,5 +25,32 @@
       "G"
     ],
     "originalPrice": 99.9
+  },
+  {
+    "id": "dg-masculina",
+    "name": "CAMISA D&G DOLCE & GABBANA MASCULINA",
+    "brand": "DOLCE & GABBANA",
+    "category": "Camisetas",
+    "description": "Camisa masculina D&G Dolce & Gabbana. Disponível nas cores branca e azul marinho. Consulte a disponibilidade antes de finalizar seu pedido.",
+    "price": 79.9,
+    "image": "assets/7F0F3F4B-0413-4D7C-803E-3505C880237D.jpeg",
+    "images": [
+      "assets/7F0F3F4B-0413-4D7C-803E-3505C880237D.jpeg",
+      "assets/C16E3D88-081B-49D0-8A33-B1C555C2FAB2.jpeg"
+    ],
+    "colors": [
+      "Azul-marinho",
+      "Branca"
+    ],
+    "sizes": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "availableSizes": [
+      "G"
+    ],
+    "originalPrice": 99.9
   }
 ]
