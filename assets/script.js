@@ -32,10 +32,25 @@ function renderProducts(items){
     const card = document.createElement("article");
     card.className = "product-card";
     const image = product.image ? `<img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name||"Produto L&G")}" loading="lazy">` : '<span class="product-placeholder">L&amp;G</span>';
-    card.innerHTML = `<div class="product-image">${image}</div><div class="product-info"><div><h3>${escapeHTML(product.name||"Produto")}</h3><p>${escapeHTML([product.brand,product.category].filter(Boolean).join(" / "))}</p></div><strong class="product-price">${money(product.price)}</strong></div><button class="product-buy" type="button" data-add="${escapeHTML(String(product.id))}">ADICIONAR À SACOLA +</button>`;
+    card.innerHTML = `<div class="product-image">${image}</div><div class="product-info"><div><h3>${escapeHTML(product.name||"Produto")}</h3><p>${escapeHTML([product.brand,product.category].filter(Boolean).join(" / "))}</p></div><strong class="product-price">${product.price ? money(product.price) : "CONSULTE"}</strong></div><button class="product-buy" type="button" data-details="${escapeHTML(String(product.id))}">VER DETALHES ↗</button>`;
     productGrid.appendChild(card);
   });
-  productGrid.querySelectorAll("[data-add]").forEach(button=>button.addEventListener("click",()=>addToCart(button.dataset.add)));
+  productGrid.querySelectorAll("[data-details]").forEach(button=>button.addEventListener("click",()=>showProductDetails(button.dataset.details)));
+}
+let selectedProductColor = "Preta";
+function showProductDetails(id){
+  const product=products.find(item=>String(item.id)===String(id));
+  if(!product)return;
+  selectedProductColor=product.colors?.[0]||"Preta";
+  const section=$("#detalhes-produto");
+  const images=(product.images||[product.image]).filter(Boolean);
+  section.innerHTML = `<div class="details-top"><button type="button" class="details-back" id="details-back">← VOLTAR À LOJA</button><span>DETALHES DO PRODUTO / 01</span></div><div class="details-layout"><div class="details-gallery">${images.map((src,index)=>`<img src="${escapeHTML(src)}" alt="${escapeHTML(product.name)} — foto ${index+1}" class="details-photo">`).join("")}</div><div class="details-copy"><p class="eyebrow dark-eyebrow">L&amp;G STORE / SELEÇÃO</p><h2>${escapeHTML(product.name)}</h2><p class="details-description">${escapeHTML(product.description||"Camiseta masculina. Escolha a cor e confira a disponibilidade de tamanho.")}</p><div class="details-option"><span>COR <b id="selected-color">${selectedProductColor.toUpperCase()}</b></span><div class="color-options">${(product.colors||["Preta","Vermelha"]).map((color,index)=>`<button type="button" class="color-option ${index===0?"active":""}" data-color="${escapeHTML(color)}">${escapeHTML(color)}</button>`).join("")}</div></div><div class="details-option"><span>TAMANHO <b>G DISPONÍVEL</b></span><div class="size-options">${(product.sizes||["P","M","G","GG"]).map(size=>`<button type="button" class="size-option ${size==="G"?"available":"sold-out"}" ${size==="G"?"":"disabled"}>${size}${size==="G"?"":" · ESGOTADO"}</button>`).join("")}</div></div><p class="stock-note">Disponível somente no tamanho G. Os tamanhos P, M e GG estão esgotados.</p><button type="button" class="details-buy" id="details-buy">COMPRAR PELO WHATSAPP ↗</button></div></div>`;
+  section.hidden=false;
+  $("#novidades").hidden=true;
+  section.scrollIntoView({behavior:"smooth",block:"start"});
+  $("#details-back").addEventListener("click",()=>{section.hidden=true;$("#novidades").hidden=false;$("#novidades").scrollIntoView({behavior:"smooth"});});
+  section.querySelectorAll("[data-color]").forEach(button=>button.addEventListener("click",()=>{selectedProductColor=button.dataset.color;section.querySelectorAll("[data-color]").forEach(item=>item.classList.toggle("active",item===button));$("#selected-color").textContent=selectedProductColor.toUpperCase();}));
+  $("#details-buy").addEventListener("click",()=>{const message=`Olá! Tenho interesse na ${product.name}, cor ${selectedProductColor}, tamanho G. Ainda está disponível?`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,"_blank","noopener");});
 }
 function escapeHTML(value){
   return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
