@@ -191,3 +191,38 @@
 @keyframes heroSlideShow{0%,3%{opacity:0}7%,28%{opacity:1}32%,100%{opacity:0}}
 @keyframes heroSlideZoom{from{transform:scale(1.02)}to{transform:scale(1.12)}}
 @media(prefers-reduced-motion:reduce){.hero-slide{animation:none;opacity:0;transform:none}.hero-slide-one{opacity:1}}
+
+
+/* Banner principal — imagens maiores, claras e em destaque */
+.hero:after{
+  background:linear-gradient(90deg,#111 0%,#111 34%,#1118 53%,#1112 100%);
+}
+.hero-art{
+  width:48%;
+  height:88%;
+  right:5%;
+  border:0;
+  background:#242424;
+}
+.hero-art:after{
+  background:linear-gradient(0deg,#0005 0%,transparent 28%);
+}
+.hero-slide{
+  filter:brightness(1.22) contrast(1.04) saturate(1.12);
+  object-position:center center;
+}
+@media(max-width:760px){
+  .hero:after{
+    background:linear-gradient(180deg,#111 0%,#111f 34%,#1118 55%,#1112 100%);
+  }
+  .hero-art{
+    width:86%;
+    height:45%;
+    right:7%;
+    bottom:62px;
+    opacity:1;
+  }
+  .hero-slide{
+    filter:brightness(1.25) contrast(1.04) saturate(1.12);
+  }
+}
