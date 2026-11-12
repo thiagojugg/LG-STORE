@@ -287,3 +287,8 @@
     background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.4) 55%,rgba(0,0,0,.18) 100%);
   }
 }
+
+
+/* Banner principal — redução sutil da altura */
+.hero{min-height:540px}
+@media(max-width:760px){.hero{min-height:590px}}
