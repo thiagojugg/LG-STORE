@@ -167,3 +167,10 @@
 .silver-prata:before{background-image:linear-gradient(0deg,#1119,transparent 70%),url("Relógio de Aço em Plataforma Iluminada.png")!important}
 .silver-correntes:before{background-image:linear-gradient(0deg,#1119,transparent 70%),url("Colar Cuban Prateado em Exibição Futurista.png")!important}
 .silver-pulseiras:before{background-image:linear-gradient(0deg,#1119,transparent 70%),url("Pulseira cubana prateada em destaque.png")!important}
+
+
+/* Quarta coleção: Kits Femininos */
+.silver-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.silver-kits:before{background-image:linear-gradient(0deg,#1119,transparent 70%),url("Joias de Diamante em Estúdio Futurista.png")!important}
+@media(min-width:761px) and (max-width:1000px){.silver-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.silver-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.silver-card:last-child{grid-column:auto;min-height:220px}.silver-kits strong{font-size:clamp(21px,5.7vw,32px);white-space:normal}}
