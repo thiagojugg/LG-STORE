@@ -19,7 +19,7 @@
 .silver-card:before{content:"";position:absolute;inset:0;z-index:-2;transition:transform .5s}
 .silver-card:hover:before{transform:scale(1.06)}
 .silver-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#080808e8,transparent 75%)}
-.silver-prata:before{background:radial-gradient(ellipse at 70% 35%,#bdbdbd,#555 34%,#242424 75%)}
+.silver-prata:before{background:linear-gradient(0deg,#1119,transparent 70%),url("Relógio de Aço em Plataforma Iluminada.png") center/cover no-repeat}
 .silver-correntes:before{background:radial-gradient(ellipse at 55% 42%,#999,#454545 38%,#202020 78%)}
 .silver-pulseiras:before{background:radial-gradient(ellipse at 65% 35%,#aaa,#4a4a4a 35%,#202020 78%)}
 .silver-card>span,.silver-card small{font-size:8px;letter-spacing:1.5px;color:#d0d0d0}
