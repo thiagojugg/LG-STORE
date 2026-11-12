@@ -52,5 +52,32 @@
       "G"
     ],
     "originalPrice": 99.9
+  },
+  {
+    "id": "adidas-esportiva",
+    "name": "CAMISETA ADIDAS ESPORTIVA MASCULINA",
+    "brand": "ADIDAS",
+    "category": "Camisetas",
+    "description": "Camiseta Adidas esportiva masculina. Disponível nas cores branca e preta. Consulte a disponibilidade antes de finalizar seu pedido.",
+    "price": 79.9,
+    "image": "assets/EE52E280-35F9-4045-93C1-825B0A14C88A.jpeg",
+    "images": [
+      "assets/EE52E280-35F9-4045-93C1-825B0A14C88A.jpeg",
+      "assets/298C42DB-2E55-4C06-BB47-EFDEFEBCF585.jpeg"
+    ],
+    "colors": [
+      "Branca",
+      "Preta"
+    ],
+    "sizes": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "availableSizes": [
+      "G"
+    ],
+    "originalPrice": 99.9
   }
 ]
