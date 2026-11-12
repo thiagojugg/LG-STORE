@@ -160,3 +160,10 @@
 }
 /* Ajuste do título de lançamentos para caber melhor em telas pequenas */
 @media(max-width:760px){.products-heading h2{font-size:clamp(48px,12vw,62px);letter-spacing:-1px}}
+
+
+/* Imagens das coleções de acessórios — regras finais para prevalecer sobre os estilos anteriores */
+.silver-card:before{background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}
+.silver-prata:before{background-image:linear-gradient(0deg,#1119,transparent 70%),url("Relógio de Aço em Plataforma Iluminada.png")!important}
+.silver-correntes:before{background-image:linear-gradient(0deg,#1119,transparent 70%),url("Colar Cuban Prateado em Exibição Futurista.png")!important}
+.silver-pulseiras:before{background-image:linear-gradient(0deg,#1119,transparent 70%),url("Pulseira cubana prateada em destaque.png")!important}
