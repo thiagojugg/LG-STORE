@@ -5,7 +5,7 @@
     "brand": "BOSS",
     "category": "Camisetas",
     "description": "Camiseta masculina BOSS. Disponível nas cores preta e vermelha. Consulte a disponibilidade antes de finalizar seu pedido.",
-    "price": 0,
+    "price": 79.9,
     "image": "assets/DEB6D3A8-BFA5-4C34-A3CA-24908C3DFBE4.jpeg",
     "images": [
       "assets/DEB6D3A8-BFA5-4C34-A3CA-24908C3DFBE4.jpeg",
@@ -23,6 +23,7 @@
     ],
     "availableSizes": [
       "G"
-    ]
+    ],
+    "originalPrice": 99.9
   }
 ]
